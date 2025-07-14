@@ -90,6 +90,14 @@
       font-size: 16px;
       margin-top: 10px;
     }
+    .subtitulo-historia { /* Nuevo estilo para el subtítulo de la historia */
+      font-size: 14px; /* Un poco más pequeño que la fecha */
+      color: #aaa; /* Un color ligeramente diferente */
+      font-style: italic;
+      margin-top: -10px; /* Acercar al título */
+      margin-bottom: 10px; /* Separar del resto del texto */
+      text-align: center;
+    }
   </style>
 </head>
 <body>
@@ -109,7 +117,7 @@
     <div id="inicio" class="section active">
       <div class="box">
         <h2 class="titulo-grande">𝐋𝐚 𝐯𝐞𝐫𝐝𝐚𝐝 𝐎𝐜𝐮𝐥𝐭𝐚</h2>
-        <p class="fecha-mediana"><em>𝕻𝖚𝖇𝖑𝖎𝖈𝖆𝖉𝖔 𝖊𝖑 𝟎𝟒 𝖉𝖊 𝖒𝖆𝖗𝖝𝖔 𝖉𝖊 𝟐𝟎𝟐𝟐</em></p>
+        <p class="fecha-mediana"><em>𝕻𝖚𝖇𝖑𝖎𝖈𝖆𝖉𝖔 𝖊𝖑 𝟎𝟒 𝖉𝖊 𝖒𝖆𝖗𝖟𝖔 𝖉𝖊 𝟐𝟎𝟐𝟐</em></p>
         <p class="texto-grande">¡𝐵𝑖𝑒𝑛! 𝐸𝑛 𝑙𝑎𝑠 𝑠𝑜𝑚𝑏𝑟𝑎𝑠 𝑑𝑒 𝑙𝑎 𝑟𝑒𝑑, 𝑙𝑎 𝑣𝑒𝑟𝑑𝑎𝑑 𝑠𝑒 𝑒𝑠𝑐𝑜𝑛𝑑𝑒. 𝑀𝑎𝑛𝑡é𝑛 𝑡𝑢𝑠 𝑜𝑗𝑜𝑠 𝑎𝑏𝑖𝑒𝑟𝑡𝑜𝑠 𝑦 𝑡𝑢 𝑖𝑛𝑠𝑡𝑖𝑛𝑡𝑜 𝑎𝑙𝑒𝑟𝑡𝑎. 𝑁𝑜 𝑐𝑜𝑛𝑓í𝑒𝑠 𝑒𝑛 𝑙𝑎𝑠 𝑠𝑜𝑚𝑏𝑟𝑎𝑠, 𝑣𝑒𝑟𝑖𝑓𝑖𝑐𝑎 𝑙𝑎 𝑖𝑛𝑓𝑜𝑟𝑚𝑎𝑐𝑖ó𝑛 𝑦 𝑚𝑎𝑛𝑡𝑒𝑛 𝑡𝑢𝑠 𝑑𝑒𝑓𝑒𝑛𝑠𝑎𝑠 𝑙𝑖𝑠𝑡𝑎𝑠. ¡𝐿𝑎 𝑠𝑒𝑔𝑢𝑟𝑖𝑑𝑎𝑑 𝑒𝑠 𝑢𝑛 𝑗𝑢𝑒𝑔𝑜 𝑑𝑒 𝑠𝑢𝑝𝑒𝑟𝑣𝑖𝑣𝑒𝑛𝑐𝑖𝑎!</p>
 
         <div style="text-align: center; margin: 20px 0;">
@@ -133,7 +141,7 @@
         <p class="texto2">𝑵𝒐 𝒕𝒐𝒅𝒐 𝒍𝒐 𝒒𝒖𝒆 𝒔𝒂𝒏𝒈𝒓𝒂 𝒆𝒔𝒕á 𝒗𝒊𝒗𝒐… 𝒚 𝒏𝒐 𝒕𝒐𝒅𝒐 𝒍𝒐 𝒒𝒖𝒆 𝒓𝒆𝒔𝒑𝒊𝒓𝒂 𝒒𝒖𝒊𝒆𝒓𝒆 𝒔𝒆𝒈𝒖𝒊𝒓 𝒆𝒙𝒊𝒔𝒕𝒊𝒆𝒏𝒅𝒐.</p>
 
         <div style="text-align: center; margin: 20px 0;">
-          <img src="https://qu.ax/cWtUN.jpg" alt="Imagen misteriosa horizontal" style="width: 100%; max-width: 480px; height: 160px; object-fit: cover; border: 2px solid red; border-radius: 5px; display: block; margin-left: auto; margin-right: auto;">
+          <img src="https://qu.ax/cWtUN.jpg" alt="Imagen misteriosa horizontal" style="width: 100%; max-width: 480px; height: 160px; object-fit: cover; border: 2px solid red; border-radius: 5px; display: block; margin-left: auto; white-space: nowrap; margin-right: auto;">
         </div>
       </div>
 
@@ -146,6 +154,7 @@
       <button class="boton" onclick="mostrarSeccion('historias')">Historias</button>
     </div>
 
+
     <div id="historias" class="section">
   <div class="box">
     <h2>Historias</h2>
@@ -155,6 +164,8 @@
 
   <div class="box">
     <h2>𝑬𝒍 𝑹𝒆𝒈𝒓𝒆𝒔𝒐 𝒅𝒆𝒍 𝑨𝒏𝒈𝒆𝒍 𝑨𝒑𝒐𝒄𝒂𝒍𝒊𝒑𝒕𝒊𝒄𝒐</h2>
+    <p class="subtitulo-historia">“𝑁𝑜 𝑣𝑖𝑛𝑜 𝑎 𝑠𝑎𝑙𝑣𝑎𝑟... 𝑣𝑖𝑛𝑜 𝑎 𝑟𝑒𝑐𝑜𝑟𝑑𝑎𝑟 𝑙𝑜 𝑞𝑢𝑒 𝑒𝑙 𝑚𝑢𝑛𝑑𝑜 𝑖𝑛𝑡𝑒𝑛𝑡ó 𝑒𝑛𝑡𝑒𝑟𝑟𝑎𝑟.”</p>
+    <p class="fecha-mediana"><em>𝕻𝖚𝖇𝖑𝖎𝖈𝖆𝖉𝖔 𝟎𝟒 𝖉𝖊 𝖊𝖓𝖊𝖗𝖔 𝖉𝖊𝖑 𝟐𝟎𝟐𝟒</em></p>
     <img src="https://qu.ax/MafZG.jpg" alt="“No vino a salvar... vino a recordar lo que el mundo intentó enterrar.”" style="width:100%; max-width:480px; height:160px; margin:10px auto; display:block; object-fit: cover;">
     <p style="margin-bottom: 20px;">Nadie recuerda cuándo desapareció.</p>
     <p style="margin-bottom: 20px;">Solo saben que, tras su partida, el mundo continuó… pero torcido.</p>
@@ -187,9 +198,10 @@
 
   <div class="box">
     <h2>Transmisión: 00:03 a. m.</h2>
+    <p class="subtitulo-historia">“𝑁𝑜 𝑡𝑜𝑑𝑜 𝑙𝑜 𝑞𝑢𝑒 𝑣𝑒𝑠 𝑒𝑛 𝑙𝑎 𝐷𝑒𝑒𝑝 𝑊𝑒𝑏 𝑒𝑠 𝑓𝑎𝑙𝑠𝑜. 𝐴 𝑣𝑒𝑐𝑒𝑠, 𝑙𝑜 𝑚𝑎𝑠 𝑟𝑒𝑎𝑙 𝑒𝑠 𝑙𝑜 𝑞𝑢𝑒 𝑚𝑎𝑠 𝑑𝑒𝑠𝑒𝑎𝑠 𝑛𝑜 ℎ𝑎𝑏𝑒𝑟 𝑣𝑖𝑠𝑡𝑜”</p>
+    <p class="fecha-mediana"><em>𝕻𝖚𝖇𝖑𝖎𝖈𝖆𝖉𝖔 𝟐𝟗 𝖉𝖊 𝖒𝖆𝖗𝖟𝖔 𝖉𝖊𝖑 𝟐𝟎𝟐𝟓</em></p>
     <img src="https://qu.ax/wdquH.png" alt="3 AM" style="width:100%; max-width:480px; height:160px; margin:10px auto; display:block; object-fit: cover;">
     <p style="margin-bottom: 20px;">Lucía pensaba que la Deep Web era solo una leyenda exagerada. Historias para adolescentes con demasiada imaginación y tiempo libre. Hasta esa noche.</p>
-    <p style="margin-bottom: 20px;">“<em>𝑁𝑜 𝑡𝑜𝑑𝑜 𝑙𝑜 𝑞𝑢𝑒 𝑣𝑒𝑠 𝑒𝑛 𝑙𝑎 𝐷𝑒𝑒𝑝 𝑊𝑒𝑏 𝑒𝑠 𝑓𝑎𝑙𝑠𝑜. 𝐴 𝑣𝑒𝑐𝑒𝑠, 𝑙𝑜 𝑚𝑎𝑠 𝑟𝑒𝑎𝑙 𝑒𝑠 𝑙𝑜 𝑞𝑢𝑒 𝑚á𝑠 𝑑𝑒𝑠𝑒𝑎𝑠 𝑛𝑜 ℎ𝑎𝑏𝑒𝑟 𝑣𝑖𝑠𝑡𝑜</em>”</p>
     <p style="margin-bottom: 20px;">Era una madrugada húmeda, el tipo de noche donde el silencio parece respirar. Mientras revisaba foros abandonados en busca de historias extrañas, encontró un enlace enterrado en un hilo sin respuestas: <code>𝗱𝗮𝗿𝗸𝗿𝗲𝗳𝗹𝗲𝗰𝘁𝗶𝗼𝗻𝟯𝟮.𝗼𝗻𝗶𝗼𝗻/𝗡𝗼 𝗺𝗶𝗿𝗿𝗼𝗿𝘀. 𝗡𝗼 𝗮𝗿𝗰𝗵𝗶𝘃𝗲𝘀. 𝗢𝗻𝗲 𝘁𝗿𝘂𝘁𝗵.</code></p>
     <p style="margin-bottom: 20px;">Activó su VPN, encendió Tor desde su celular viejo conectado a un WiFi prestado y accedió. La página era simple: pantalla negra, botón de reproducción y un contador. 𝟎𝟎:𝟎𝟎:𝟎𝟏… 𝟎𝟎:𝟎𝟎:𝟎𝟐…</p>
     <p style="margin-bottom: 20px;">La transmisión comenzó.</p>
@@ -207,6 +219,8 @@
 
   <div class="box">
     <h2>Sala Roja: Usuario 109</h2>
+    <p class="subtitulo-historia">“Cuando entras, no eres solo espectador. Eres parte del horror.”</p>
+    <p class="fecha-mediana"><em>𝕻𝖚𝖇𝖑𝖎𝖈𝖆𝖉𝖔 𝟏𝟕 𝖉𝖊 𝖆𝖇𝖗𝖎𝖑 𝖉𝖊𝖑 𝟐𝟎𝟐𝟓</em></p>
     <img src="https://qu.ax/gRRou.png" alt="Descripción de la historia 3" style="width:100%; max-width:480px; height:160px; margin:10px auto; display:block; object-fit: cover;">
     <p style="margin-bottom: 20px;">Eran las 2:44 a. m. Daniel ya había cruzado muchas líneas navegando por la Deep Web. Pero esa noche, encontró algo distinto: Un enlace sin descripción, solo un mensaje parpadeante: “Usuario 109 – EN VIVO” y un botón rojo: ENTRAR.</p>
     <p style="margin-bottom: 20px;">Lo hizo. La pantalla tardó en cargar. Primero estática. Luego, una imagen granulada.</p>
