@@ -22,12 +22,21 @@
       color: white;
       padding: 10px;
       text-align: center;
+      display: flex; /* Activa flexbox para la navegación */
+      justify-content: center; /* Centra los elementos horizontalmente */
+      align-items: center; /* Centra los elementos verticalmente */
+      position: relative; /* Para posicionar el dropdown */
+      z-index: 10; /* Asegura que el dropdown esté sobre otros elementos */
+      flex-wrap: nowrap; /* Evita que los elementos se envuelvan a la siguiente línea */
     }
     nav a {
       color: white;
       margin: 0 15px;
       text-decoration: none;
       cursor: pointer;
+      position: relative; /* Para los submenús */
+      display: inline-block; /* Para que el padding y margin funcionen bien */
+      white-space: nowrap; /* Evita el salto de línea en los enlaces */
     }
     .container {
       max-width: 800px;
@@ -98,6 +107,50 @@
       margin-bottom: 10px; /* Separar del resto del texto */
       text-align: center;
     }
+
+    /* Dropdown styles */
+    .dropdown {
+      position: relative;
+      display: inline-block;
+      white-space: nowrap; /* Evita el salto de línea en el dropdown */
+    }
+    .dropbtn {
+      color: white;
+      margin: 0 15px;
+      text-decoration: none;
+      cursor: pointer;
+      padding: 0; /* Elimina el padding del botón principal para mejor alineación */
+      border: none;
+      background-color: transparent; /* Fondo transparente para que parezca un enlace más */
+      font-family: Algerian, sans-serif; /* Hereda la fuente */
+      font-size: 1em; /* Ajusta el tamaño de la fuente si es necesario */
+    }
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: #555; /* Un tono un poco más oscuro que la barra de navegación */
+      min-width: 160px;
+      box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+      z-index: 1;
+      left: 50%; /* Centra el dropdown bajo el elemento padre */
+      transform: translateX(-50%); /* Ajusta para el centrado exacto */
+      border-radius: 4px;
+      overflow: hidden; /* Para que los bordes redondeados se apliquen a los elementos internos */
+    }
+    .dropdown-content a {
+      color: white;
+      padding: 12px 16px;
+      text-decoration: none;
+      display: block;
+      text-align: left;
+      margin: 0; /* Reinicia el margen del 'nav a' */
+    }
+    .dropdown-content a:hover {
+      background-color: #8B0000; /* Rojo oscuro para hover */
+    }
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
   </style>
 </head>
 <body>
@@ -111,6 +164,12 @@
     <a onclick="mostrarSeccion('inicio')">Inicio</a>
     <a onclick="mostrarSeccion('sobre')">Sobre mí</a>
     <a onclick="mostrarSeccion('contacto')">Contacto</a>
+    <div class="dropdown">
+      <button class="dropbtn">UKN</button>
+      <div class="dropdown-content">
+        <a onclick="mostrarSeccion('abismoOscuro')">Abismo Oscuro</a>
+      </div>
+    </div>
   </nav>
 
   <div class="container">
@@ -126,7 +185,7 @@
       </div>
 
       <div class="box" style="padding-top: 5px;">
-        <h2 class="titulo2" style="margin-bottom: 8px; text-align: center;">𝐄𝐥 𝐬𝐞𝐜𝐫𝐞𝐭𝐨 𝐦𝐞𝐣𝐨𝐫 𝐠𝐮𝐚𝐫𝐝𝐚𝐝𝐨</h2>
+        <h2 class="titulo2" style="margin-bottom: 8px; text-align: center;">𝐄𝐥 𝐬𝐞𝐜𝐫𝐞𝐭𝐨 𝐦𝐞𝑗𝒐𝒓 𝐠𝐮𝐚𝐫𝐝𝐚𝐝𝐨</h2>
         <p class="fecha2" style="text-align: center; margin-top: 0; margin-bottom: 8px;"><em>𝕻𝖚𝖇𝖑𝖎𝖈𝖆𝖉𝖔 𝖊𝖑 𝟐𝟓 𝖉𝖊 𝖏𝖚𝖑𝖎𝖔 𝖉𝖊 𝟐𝟎𝟐𝟐</em></p>
         <p class="texto2">𝑳𝒂 𝒗𝒆𝒓𝒅𝒂𝒅 𝒆𝒔 𝒖𝒏 𝒇𝒂𝒏𝒕𝒂𝒔𝒎𝒂 𝒒𝒖𝒆 𝒔𝒆 𝒆𝒔𝒄𝒐𝒏𝒅𝒆 𝒅𝒆𝒕𝒓á𝒔 𝒅𝒆 𝒍𝒂𝒔 𝒔𝒐𝒎𝒃𝒓𝒂𝒔 𝒅𝒆 𝒍𝒂 𝒅𝒖𝒅𝒂. 𝑵𝒐 𝒍𝒂 𝒊𝒏𝒗𝒐𝒒𝒖𝒆𝒔 𝒔𝒊𝒏 𝒑𝒓𝒖𝒆𝒃𝒂𝒔, 𝒐 𝒕𝒆 𝒄𝒐𝒏𝒔𝒖𝒎𝒊𝒓𝒂 𝒍𝒂 𝒊𝒏𝒄𝒆𝒓𝒕𝒊𝒅𝒖𝒎𝒃𝒓𝒆....</p>
 
@@ -201,7 +260,7 @@ Léelas con cautela: algunas palabras se quedan contigo, incluso cuando cierras 
   <div class="box">
     <h2>Transmisión: 00:03 a. m.</h2>
     <p class="subtitulo-historia">“𝑁𝑜 𝑡𝑜𝑑𝑜 𝑙𝑜 𝑞𝑢𝑒 𝑣𝑒𝑠 𝑒𝑛 𝑙𝑎 𝐷𝑒𝑒𝑝 𝑊𝑒𝑏 𝑒𝑠 𝑓𝑎𝑙𝑠𝑜. 𝐴 𝑣𝑒𝑐𝑒𝑠, 𝑙𝑜 𝑚𝑎𝑠 𝑟𝑒𝑎𝑙 𝑒𝑠 𝑙𝑜 𝑞𝑢𝑒 𝑚𝑎𝑠 𝑑𝑒𝑠𝑒𝑎𝑠 𝑛𝑜 ℎ𝑎𝑏𝑒𝑟 𝑣𝑖𝑠𝑡𝑜”</p>
-    <p class="fecha-mediana"><em>𝕻𝖚𝖇𝖑𝖎𝖈𝖆𝖉𝖔 𝟐𝟗 𝖉𝖊 𝖒𝖆𝖗𝖟𝖔 𝖉𝖊𝖑 𝟐𝟎𝟐𝟓</em></p>
+    <p class="fecha-mediana"><em>𝕻𝖚𝖇𝖑𝖎𝖈𝖆𝖉𝖔 𝟐𝟗 𝖉𝖊 𝖒𝖆𝖗𝖟𝒐 𝖉𝖊𝖑 𝟐𝟎𝟐𝟓</em></p>
     <img src="https://qu.ax/wdquH.png" alt="3 AM" style="width:100%; max-width:480px; height:160px; margin:10px auto; display:block; object-fit: cover;">
     <p style="margin-bottom: 20px;">Lucía pensaba que la Deep Web era solo una leyenda exagerada. Historias para adolescentes con demasiada imaginación y tiempo libre. Hasta esa noche.</p>
     <p style="margin-bottom: 20px;">Era una madrugada húmeda, el tipo de noche donde el silencio parece respirar. Mientras revisaba foros abandonados en busca de historias extrañas, encontró un enlace enterrado en un hilo sin respuestas: <code>𝗱𝗮𝗿𝗸𝗿𝗲𝗳𝗹𝗲𝗰𝘁𝗶𝗼𝗻𝟯𝟮.𝗼𝗻𝗶𝗼𝗻/𝗡𝗼 𝗺𝗶𝗿𝗿𝗼𝗿𝘀. 𝗡𝗼 𝗮𝗿𝗰𝗵𝗶𝘃𝗲𝘀. 𝗢𝗻𝗲 𝘁𝗿𝘂𝘁𝗵.</code></p>
@@ -239,6 +298,18 @@ Léelas con cautela: algunas palabras se quedan contigo, incluso cuando cierras 
     <p style="margin-bottom: 20px;">📷 [Se ha activado tu cámara]</p>
   </div>
 </div>
+
+
+    <div id="abismoOscuro" class="section">
+        <div class="box">
+            <h2>Abismo Oscuro</h2>
+            <p>Aquí es donde las sombras bailan y los secretos susurran. Prepárate para las historias que aún no han sido contadas...</p>
+            <p><strong><em>Próximamente, nuevas narrativas emergerán de las profundidades del silencio.</em></strong></p>
+            <div style="text-align: center; margin: 20px 0;">
+              <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/5b6f33d7-463e-436f-b258-37604473b64c.png" alt="Portal oscuro" style="width: 100%; max-width: 400px; height: auto; object-fit: cover; border: 2px solid red; border-radius: 5px; display: block; margin-left: auto; margin-right: auto;">
+            </div>
+        </div>
+    </div>
 
 
     <div id="sobre" class="section">
