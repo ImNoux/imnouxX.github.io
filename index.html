@@ -351,4 +351,70 @@ Ella no estaba llorando.</p>
     <p style="margin-bottom: 20px;">Lo hizo. La pantalla tardó en cargar. Primero estática. Luego, una imagen granulada.</p>
     <p style="margin-bottom: 20px;">Una habitación oscura, sin ventanas. Iluminada por una sola bombilla colgando del techo. En el centro, un hombre atado a una silla, golpeado, sucio… Respiraba con dificultad.</p>
     <p style="margin-bottom: 20px;">Daniel entrecerró los ojos.</p>
-    <p style="margin-bottom: 20px;">No era un extraño. Era su pa
+    <p style="margin-bottom: 20px;">No era un extraño. Era su padre.</p>
+    <p style="margin-bottom: 20px;">El mismo hombre que había desaparecido sin dejar rastro una semana atrás. La policía cerró el caso como abandono. Pero ahí estaba. En una Red Room real. Y alguien lo estaba transmitiendo en vivo.</p>
+    <p style="margin-bottom: 20px;">Abajo, en el chat de la página, los mensajes eran monstruosos:</p>
+    <p style="margin-bottom: 20px;">💰 “\$200 si le cortan otra uña.”</p>
+    <p style="margin-bottom: 20px;">🔪 “\$500 y elige quién entra con la máscara.”</p>
+    <p style="margin-bottom: 20px;">😈 “Hazlo gritar. Por favor.”</p>
+    <p style="margin-bottom: 20px;">Daniel quiso desconectarse. Salir. Pero no podía. La pantalla no se cerraba. El cursor no respondía. Un nuevo mensaje apareció:</p>
+    <p style="margin-bottom: 20px;">💬 “Gracias por conectarte, Daniel. Ahora eres parte del espectáculo.”</p>
+    <p style="margin-bottom: 20px;">📷 [Se ha activado tu cámara]</p>
+  </div>
+</div>
+
+
+    <div id="abismoOscuro" class="section">
+        <div class="box">
+            <h2>Abismo Oscuro</h2>
+            <p>Aquí es donde las sombras bailan y los secretos susurran. Prepárate para las historias que aún no han sido contadas...</p>
+            <p><strong><em>Próximamente, nuevas narrativas emergerán de las profundidades del silencio.</em></strong></p>
+            <div style="text-align: center; margin: 20px 0;">
+              <img src="https://qu.ax/OSAvf.jpg" alt="Portal oscuro" style="width: 140%; max-width: 250px; height: 160px; object-fit: cover; border: 2px solid red; border-radius: 5px; display: block; margin-left: auto; margin-right: auto;">
+            </div>
+        </div>
+    </div>
+
+
+    <div id="sobre" class="section">
+      <div class="box">
+        <h2>Sobre mí</h2>
+        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/ce1cbc14-e2b9-41fc-9d72-3baaa0c149c4.png" alt="Mysterious hooded figure" style="width:100%; max-width:300px; margin:10px auto; display:block; border-radius:50%;">
+        <p>En el laberinto de la mente, los pensamientos se entrelazan como hilos de una telaraña. Aquí se despliegan los fragmentos de una verdad que se desvanece. Sumérgete en la oscuridad y deja que las sombras te guíen a través de los rincones más profundos de la conciencia.</p>
+      </div>
+    </div>
+
+    <div id="contacto" class="section">
+      <div class="box">
+        <h2>Contacto</h2>
+        <p>IG: @xxaet</p>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <p>&copy; 2025 Noux domain. ¿Estás listo para aventurarte en este mundo? Todos los derechos reservados.</p>
+  </footer>
+
+  <script>
+    function mostrarSeccion(id) {
+      const secciones = document.querySelectorAll('.section');
+      secciones.forEach(sec => sec.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+      // Save the active section ID to localStorage
+      localStorage.setItem('lastActiveSection', id);
+    }
+
+    // On page load, check localStorage for the last active section
+    document.addEventListener('DOMContentLoaded', () => {
+      const lastActiveSection = localStorage.getItem('lastActiveSection');
+      if (lastActiveSection) {
+        mostrarSeccion(lastActiveSection);
+      } else {
+        // If no section is saved, default to 'inicio'
+        mostrarSeccion('inicio');
+      }
+    });
+  </script>
+</body>
+</html>
