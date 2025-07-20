@@ -14,11 +14,11 @@
     header {
       background-color: #000000;
       color: red;
-      padding: 0; /* Elimina el padding para que la imagen llegue hasta el borde */
+      padding: 0;
       text-align: center;
     }
     header h1, header p {
-        margin: 10px 0; /* Añade un margen a los elementos de texto dentro del header para separarlos de la imagen */
+        margin: 10px 0;
     }
     nav {
       background-color: #333;
@@ -155,7 +155,7 @@
   </style>
 </head>
 <body>
-  <header>
+    <header>
     <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/3bbc42e2-5716-4cec-b9ea-17ba84c27ac5.png" alt="Silueta en la oscuridad neblinosa" style="width: 100%; height: auto; max-height: 150px; object-fit: cover;" onclick="mostrarSeccion('casa')">
     <h1>𝖀𝖓𝖐𝖓𝖔𝖜 𝕭𝖑𝖔𝖌</h1>
     <p>𝐄𝐥 𝐯𝐚𝐜𝐢𝐨 𝐭𝐞 𝐨𝐛𝐬𝐞𝐫𝐯𝐚, 𝐜𝐨𝐦𝐨 𝐞𝐬𝐭𝐞 𝐛𝐥𝐨𝐠 𝐚𝐛𝐚𝐧𝐝𝐨𝐧𝐚𝐝𝐨, 𝐪𝐮𝐞 𝐚𝐮𝐧 𝐬𝐚𝐧𝐠𝐫𝐚 𝐩𝐚𝐥𝐚𝐛𝐫𝐚𝐬 𝐪𝐮𝐞 𝐧𝐮𝐧𝐜𝐚 𝐝𝐞𝐛𝐢𝐬𝐭𝐞 𝐥𝐞𝐞𝐫</p>
@@ -163,7 +163,13 @@
   <nav>
     <a onclick="mostrarSeccion('casa')">Hogar</a>
     <a onclick="mostrarSeccion('tba')">TBA</a>
-    <a onclick="mostrarSeccion('TXT')">TXT</a>
+    <div class="dropdown">
+      <button class="dropbtn">TXT</button>
+      <div class="dropdown-content">
+        <a onclick="mostrarSeccion('historias')">Historias</a>
+        <a onclick="mostrarSeccion('txtproximamente')">Próximamente</a>
+      </div>
+    </div>
     <div class="dropdown">
       <button class="dropbtn">UNK</button>
       <div class="dropdown-content">
@@ -172,7 +178,6 @@
       </div>
     </div>
   </nav>
-
   <div class="container">
     <div id="casa" class="section active">
       <div class="box">
@@ -186,7 +191,7 @@
       </div>
 
       <div class="box" style="padding-top: 5px;">
-        <h2 class="titulo2" style="margin-bottom: 8px; text-align: center;">𝐄𝐥 𝐬𝐞𝐜𝐫𝐞𝐭𝐨 𝐦𝐞𝑗𝒐𝒓 𝐠𝐮𝐚𝐫𝐝𝐚𝐝𝐨</h2>
+        <h2 class="titulo2" style="margin-bottom: 8px; text-align: center;">𝐄𝐥 𝐬𝐞𝐜𝐫𝐞𝐭𝐨 𝐦𝐞𝑗𝒐𝒓 𝐠𝐮𝐚𝒓𝒅𝒂𝒅𝒐</h2>
         <p class="fecha2" style="text-align: center; margin-top: 0; margin-bottom: 8px;"><em>𝕻𝖚𝖇𝖑𝖎𝖈𝖆𝖉𝖔 𝖊𝖑 𝟐𝟓 𝖉𝖊 𝖏𝖚𝖑𝖎𝖔 𝖉𝖊 𝟐𝟎𝟐𝟐</em></p>
         <p class="texto2">𝑳𝒂 𝒗𝒆𝒓𝒅𝒂𝒅 𝒆𝒔 𝒖𝒏 𝒇𝒂𝒏𝒕𝒂𝒔𝒎𝒂 𝒒𝒖𝒆 𝒔𝒆 𝒆𝒔𝒄𝒐𝒏𝒅𝒆 𝒅𝒆𝒕𝒓á𝒔 𝒅𝒆 𝒍𝒂𝒔 𝒔𝒐𝒎𝒃𝒓𝒂𝒔 𝒅𝒆 𝒍𝒂 𝒅𝒖𝒅𝒂. 𝑵𝒐 𝒍𝒂 𝒊𝒏𝒗𝒐𝒒𝒖𝒆𝒔 𝒔𝒊𝒏 𝒑𝒓𝒖𝒆𝒃𝒂𝒔, 𝒐 𝒕𝒆 𝒄𝒐𝒏𝒔𝒖𝒎𝒊𝒓𝒂 𝒍𝒂 𝒊𝒏𝒄𝒆𝒓𝒕𝒊𝒅𝒖𝒎𝒃𝒓𝒆....</p>
 
@@ -211,7 +216,7 @@
         <p class="texto-grande">𝑽𝒊 𝒖𝒏𝒂 𝒕𝒓𝒂𝒏𝒔𝒎𝒊𝒔𝒊𝒐𝒏 𝒆𝒏 𝒅𝒊𝒓𝒆𝒄𝒕𝒐, 𝒑𝒆𝒓𝒐 𝒍𝒂 𝒄𝒂𝒎𝒂𝒓𝒂 𝒆𝒔𝒕𝒂𝒃𝒂 𝒅𝒆𝒏𝒕𝒓𝒐 𝒅𝒆 𝒖𝒏𝒂 𝒕𝒖𝒎𝒃𝒂.</p>
 
        <div style="text-align: center; margin:20px 0;">
-        
+
 <img src="https://qu.ax/OqNeE.png" alt="Imagen misteriosa horizontal" style="width: 100%; max-width: 480px; height: 160px; object-fit: cover; border: 2px solid red; border-radius: 5px; display: block; margin-left: auto; white-space: nowrap; margin-right: auto;">
           </div>
         </div>
@@ -219,14 +224,11 @@
      <div class="box"
 style="padding-top: 5px;">
         <h2 class="titulo-grande">𝐍𝐨 𝐞𝐫𝐞𝐬 𝐞𝐥 𝐮𝐧𝐢𝐜𝐨 𝐦𝐢𝐫𝐚𝐧𝐝𝐨</h2>
-                <p class="fecha-mediana"><em>𝕻𝖚𝖇𝖑𝖎𝖈𝖆𝖉𝖔 𝟏𝟐 𝖉𝖊 𝖓𝖔𝖛𝖎𝖊𝖒𝖇𝖗𝖊 𝖉𝖊𝖑 𝟐𝟎𝟐𝟐</em></p>          <p class="texto-grande">"𝑳𝒂 𝒑𝒂𝒈𝒊𝒏𝒂 𝒅𝒆𝒄𝒊𝒂: ‘𝑺𝒐𝒍𝒐 𝒑𝒂𝒓𝒂 𝒐𝒃𝒔𝒆𝒓𝒗𝒂𝒅𝒐𝒓𝒆𝒔’… 𝒚 𝒂𝒉𝒐𝒓𝒂 𝒔𝒊𝒆𝒏𝒕𝒐 𝒒𝒖𝒆 𝒉𝒂𝒚 𝒎𝒂𝒔 𝒐𝒋𝒐𝒔 𝒆𝒏 𝒎𝒊 𝒄𝒖𝒂𝒓𝒕𝒐 𝒒𝒖𝒆 𝒂𝒏𝒕𝒆𝒔.".</p>
+                <p class="fecha-mediana"><em>𝕻𝖚𝖇𝖑𝖎𝖈𝖆𝖉𝖔 𝟏𝟐 𝖉𝖊 𝖓𝖔𝖛𝖎𝖊𝖒𝖇𝖗𝖊 𝖉𝖊𝖑 𝟐𝟎𝟐𝟐</em></p>          <p class="texto-grande">"𝑳𝒂 𝒑𝒂𝒈𝒊𝒏𝒂 𝒅𝒆𝒄𝒊𝒂: ‘𝑺𝒐𝒍𝒐 𝒑𝒂𝒓𝒂 𝒐𝒃𝒔𝒆𝒓𝒗𝒂𝒅𝒐𝒓𝒆𝒔’… 𝒚 𝒂𝒉𝒐𝒓𝒂 𝒔𝒊𝒆𝒏𝒕𝒐 𝒒𝒖𝒆 𝒉𝒂𝒚 𝒎𝒂𝒔 𝒐𝒃𝒐𝒔 𝒆𝒏 𝒎𝒊 𝒄𝒖𝒂𝒓𝒕𝒐 𝒒𝒖𝒆 𝒂𝒏𝒕𝒆𝒔.".</p>
  <div style="text-align: center; margin: 20px 0;">
           <img src="https://qu.ax/qgndT.jpg" alt="Imagen misteriosa horizontal" style="width: 100%; max-width: 480px; height: 160px; object-fit: cover; border: 2px solid red; border-radius: 5px; display: block; margin-left: auto; white-space: nowrap; margin-right: auto;">
         </div>
      </div>
-
-
-      <button class="boton" onclick="mostrarSeccion('historias')">Historias</button>
     </div>
 
 
@@ -242,7 +244,7 @@ Léelas con cautela: algunas palabras se quedan contigo, incluso cuando cierras 
   <div class="box">
     <h2>𝑬𝒍 𝑹𝒆𝒈𝒓𝒆𝒔𝒐 𝒅𝒆𝒍 𝑨𝒏𝒈𝒆𝒍 𝑨𝒑𝒐𝒄𝒂𝒍𝒊𝒑𝒕𝒊𝒄𝒐</h2>
     <p class="subtitulo-historia">“𝑁𝑜 𝑣𝑖𝑛𝑜 𝑎 𝑠𝑎𝑙𝑣𝑎𝑟... 𝑣𝑖𝑛𝑜 𝑎 𝑟𝑒𝑐𝑜𝑟𝑑𝑎𝑟 𝑙𝑜 𝑞𝑢𝑒 𝑒𝑙 𝑚𝑢𝑛𝑑𝑜 𝑖𝑛𝑡𝑒𝑛𝑡ó 𝑒𝑛𝑡𝑒𝑟𝑟𝑎𝑟.”</p>
-    <p class="fecha-mediana"><em>𝕻𝖚𝖇𝖑𝖎𝖈𝖆𝖉𝖔 𝟎𝟒 𝖉𝖊 𝖊𝖓𝖊𝖗𝖔 𝖉𝖊𝖑 𝟐𝟎𝟐𝟒</em></p>
+    <p class="fecha-mediana"><em>𝕻𝖚𝖇𝖑𝖎𝖈𝖆𝖉𝖔 𝟎𝟒 𝖉𝖊 𝖊𝖓𝖊𝒓𝒐 𝖉𝖊𝖑 𝟐𝟎𝟐𝟒</em></p>
     <img src="https://qu.ax/MafZG.jpg" alt="“No vino a salvar... vino a recordar lo que el mundo intentó enterrar.”" style="width:100%; max-width:480px; height:160px; margin:10px auto; display:block; object-fit: cover;">
     <p style="margin-bottom: 20px;">Nadie recuerda cuándo desapareció.</p>
     <p style="margin-bottom: 20px;">Solo saben que, tras su partida, el mundo continuó… pero torcido.</p>
@@ -293,7 +295,6 @@ Léelas con cautela: algunas palabras se quedan contigo, incluso cuando cierras 
     <p style="margin-bottom: 20px;">La miniatura mostraba su rostro. Dormido. Aunque ella seguía despierta.</p>
     <p style="margin-bottom: 20px;">🕳️ Continuará…</p>
   </div>
-
   <div class="box">
     <h2>Capítulo 2 – La Página Que No Puedes Borrar</h2>
     <p class="subtitulo-historia">"𝐂𝐮𝐚𝐧𝐝𝐨 𝐡𝐚𝐜𝐞𝐬 𝐜𝐥𝐢𝐜𝐤 𝐞𝐧 𝐥𝐨 𝐩𝐫𝐨𝐡𝐢𝐛𝐢𝐝𝐨, 𝐥𝐨 𝐩𝐫𝐨𝐡𝐢𝐛𝐢𝐝𝐨 𝐭𝐞 𝐬𝐢𝐠𝐮𝐞."</p>
@@ -387,8 +388,8 @@ Ella no estaba llorando.</p>
 <div style="text-align: center; margin: 20px 0;">
           <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/5f8a6daa-944a-48f5-8284-719a1f64f4a1.png" alt="Portal oscuro" style="width: 140%; max-width: 250px; height: 160px; object-fit: cover; border: 2px solid red; border-radius: 5px; display: block; margin-left: auto; margin-right: auto;">
 
-            <p style="margin-bottom: 20px;">Creía haberlo visto todo.  
-    Me mudé a Florida por el calor, la tranquilidad… y los precios bajos de una casa embargada.  
+            <p style="margin-bottom: 20px;">Creía haberlo visto todo.
+      Me mudé a Florida por el calor, la tranquilidad… y los precios bajos de una casa embargada.  
     Todo parecía normal, hasta que encontré un panel flojo en el suelo del lavadero. Debajo, una trampilla metálica, sin pomo, sin bisagras visibles. La oxidación decía que llevaba allí mucho tiempo.</p>
 
     <p style="margin-bottom: 20px;">Usé una palanca. El aire que salió era espeso, casi biológico. Bajé. Solo había una luz roja parpadeante en el techo. Las paredes no eran de concreto, sino de metal corrugado.</p>
@@ -408,7 +409,7 @@ Ella no estaba llorando.</p>
     <p style="margin-bottom: 20px;">Y cada vez, el video es distinto.</p>
 
     <p style="margin-bottom: 20px;">Siempre la misma mujer. Siempre más delgada. Siempre mirando directamente a mí.</p>
-        
+
         </div>
       </div>
     </div>
@@ -416,8 +417,7 @@ Ella no estaba llorando.</p>
 
     <div id="tba" class="section">
       <div class="box">
-           <h2>
-<p class="subtitulo-historia">𝑈𝑙𝑡𝑖𝑚𝑎 𝑎𝑐𝑡𝑢𝑎𝑙𝑖𝑧𝑎𝑐𝑖ó𝑛: 𝑑𝑒𝑠𝑐𝑜𝑛𝑜𝑐𝑖𝑑𝑎.</p></h2>
+           <h2><p class="subtitulo-historia">𝑈𝑙𝑡𝑖𝑚𝑎 𝑎𝑐𝑡𝑢𝑎𝑙𝑖𝑧𝑎𝑐𝑖ó𝑛: 𝑑𝑒𝑠𝑐𝑜𝑛𝑜𝑐𝑖𝑑𝑎.</p></h2>
         <p>𝕺𝖇𝖘𝖊𝖗𝖛𝖆𝖘 𝖊𝖑 𝖛𝖆𝖈𝖎𝖔, 𝖈𝖗𝖊𝖞𝖊𝖓𝖉𝖔 𝖙𝖊𝖓𝖊𝖗 𝖊𝖑 𝖈𝖔𝖓𝖙𝖗𝖔𝖑, 𝖕𝖊𝖗𝖔 𝖊𝖑 𝖋𝖚𝖊 𝖖𝖚𝖎𝖊𝖓 𝖆𝖇𝖗𝖎𝖔́ 𝖑𝖔𝖘 𝖔𝖏𝖔𝖘 𝖕𝖗𝖎𝖒𝖊𝖗𝖔.
 </p>
         <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/ce1cbc14-e2b9-41fc-9d72-3baaa0c149c4.png" alt="Mysterious hooded figure" style="width:100%; max-width:300px; margin:10px auto; display:block; border-radius:50%;">
@@ -457,13 +457,13 @@ Ella no estaba llorando.</p>
       </div>
     </div>
 
-    <div id="TXT" class="section">
+    <div id="txtproximamente" class="section">
   <div class="box">
     <h2>PRÓXIMAMENTE</h2>
     <p>No lo verás llegar.
     No podrás detenerlo.
     El sistema caerá en silencio.
-    Y tú solo serás <a onclick="mostrarSeccion('historias')" style="color: red; text-decoration: underline; cursor: pointer;">un eco perdido en la red</a>.
+    Y tú solo serás un eco perdido en la red.
     </p>
   </div>
 </div>
@@ -489,7 +489,7 @@ Ella no estaba llorando.</p>
         mostrarSeccion(lastActiveSection);
       } else {
         // If no section is saved, default to 'inicio'
-        mostrarSeccion('inicio');
+        mostrarSeccion('casa'); // Cambiado a 'casa' para que el inicio por defecto sea la página principal
       }
     });
   </script>
