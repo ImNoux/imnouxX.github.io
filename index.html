@@ -14,29 +14,32 @@
     header {
       background-color: #000000;
       color: red;
-      padding: 20px 0;
+      padding: 0; /* Elimina el padding para que la imagen llegue hasta el borde */
       text-align: center;
+    }
+    header h1, header p {
+        margin: 10px 0; /* Añade un margen a los elementos de texto dentro del header para separarlos de la imagen */
     }
     nav {
       background-color: #333;
       color: white;
       padding: 10px;
       text-align: center;
-      display: flex; /* Activa flexbox para la navegación */
-      justify-content: center; /* Centra los elementos horizontalmente */
-      align-items: center; /* Centra los elementos verticalmente */
-      position: relative; /* Para posicionar el dropdown */
-      z-index: 10; /* Asegura que el dropdown esté sobre otros elementos */
-      flex-wrap: nowrap; /* Evita que los elementos se envuelvan a la siguiente línea */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      z-index: 10;
+      flex-wrap: nowrap;
     }
     nav a {
       color: white;
       margin: 0 15px;
       text-decoration: none;
       cursor: pointer;
-      position: relative; /* Para los submenús */
-      display: inline-block; /* Para que el padding y margin funcionen bien */
-      white-space: nowrap; /* Evita el salto de línea en los enlaces */
+      position: relative;
+      display: inline-block;
+      white-space: nowrap;
     }
     .container {
       max-width: 800px;
@@ -68,7 +71,6 @@
     .section.active {
       display: block;
     }
-
     /* Nuevos estilos personalizados */
     .titulo-grande {
       font-size: 19px;
@@ -99,43 +101,42 @@
       font-size: 16px;
       margin-top: 10px;
     }
-    .subtitulo-historia { /* Nuevo estilo para el subtítulo de la historia */
-      font-size: 14px; /* Un poco más pequeño que la fecha */
-      color: #aaa; /* Un color ligeramente diferente */
+    .subtitulo-historia {
+      font-size: 14px;
+      color: #aaa;
       font-style: italic;
-      margin-top: -10px; /* Acercar al título */
-      margin-bottom: 10px; /* Separar del resto del texto */
+      margin-top: -10px;
+      margin-bottom: 10px;
       text-align: center;
     }
-
     /* Dropdown styles */
     .dropdown {
       position: relative;
       display: inline-block;
-      white-space: nowrap; /* Evita el salto de línea en el dropdown */
+      white-space: nowrap;
     }
     .dropbtn {
       color: white;
       margin: 0 15px;
       text-decoration: none;
       cursor: pointer;
-      padding: 0; /* Elimina el padding del botón principal para mejor alineación */
+      padding: 0;
       border: none;
-      background-color: transparent; /* Fondo transparente para que parezca un enlace más */
-      font-family: Algerian, sans-serif; /* Hereda la fuente */
-      font-size: 1em; /* Ajusta el tamaño de la fuente si es necesario */
+      background-color: transparent;
+      font-family: Algerian, sans-serif;
+      font-size: 1em;
     }
     .dropdown-content {
       display: none;
       position: absolute;
-      background-color: #555; /* Un tono un poco más oscuro que la barra de navegación */
+      background-color: #555;
       min-width: 160px;
       box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
       z-index: 1;
-      left: 50%; /* Centra el dropdown bajo el elemento padre */
-      transform: translateX(-50%); /* Ajusta para el centrado exacto */
+      left: 50%;
+      transform: translateX(-50%);
       border-radius: 4px;
-      overflow: hidden; /* Para que los bordes redondeados se apliquen a los elementos internos */
+      overflow: hidden;
     }
     .dropdown-content a {
       color: white;
@@ -143,22 +144,22 @@
       text-decoration: none;
       display: block;
       text-align: left;
-      margin: 0; /* Reinicia el margen del 'nav a' */
+      margin: 0;
     }
     .dropdown-content a:hover {
-      background-color: #8B0000; /* Rojo oscuro para hover */
+      background-color: #8B0000;
     }
     .dropdown:hover .dropdown-content {
       display: block;
     }
   </style>
 </head>
-<body><header>
-   <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/3bbc42e2-5716-4cec-b9ea-17ba84c27ac5.png" alt="Silueta en la oscuridad neblinosa" style="width:650px; max-width:99%; height: auto; max-height: 200px; margin-bottom: 1px;" onclick="mostrarSeccion('casa')">
-  <h1>𝖀𝖓𝖐𝖓𝖔𝖜 𝕭𝖑𝖔𝖌</h1>
-  <p>𝐄𝐥 𝐯𝐚𝐜𝐢𝐨 𝐭𝐞 𝐨𝐛𝐬𝐞𝐫𝐯𝐚, 𝐜𝐨𝐦𝐨 𝐞𝐬𝐭𝐞 𝐛𝐥𝐨𝐠 𝐚𝐛𝐚𝐧𝐝𝐨𝐧𝐚𝐝𝐨, 𝐪𝐮𝐞 𝐚𝐮𝐧 𝐬𝐚𝐧𝐠𝐫𝐚 𝐩𝐚𝐥𝐚𝐛𝐫𝐚𝐬 𝐪𝐮𝐞 𝐧𝐮𝐧𝐜𝐚 𝐝𝐞𝐛𝐢𝐬𝐭𝐞 𝐥𝐞𝐞𝐫</p>
-</header>
-
+<body>
+  <header>
+    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/3bbc42e2-5716-4cec-b9ea-17ba84c27ac5.png" alt="Silueta en la oscuridad neblinosa" style="width: 100%; height: auto; max-height: 150px; object-fit: cover;" onclick="mostrarSeccion('casa')">
+    <h1>𝖀𝖓𝖐𝖓𝖔𝖜 𝕭𝖑𝖔𝖌</h1>
+    <p>𝐄𝐥 𝐯𝐚𝐜𝐢𝐨 𝐭𝐞 𝐨𝐛𝐬𝐞𝐫𝐯𝐚, 𝐜𝐨𝐦𝐨 𝐞𝐬𝐭𝐞 𝐛𝐥𝐨𝐠 𝐚𝐛𝐚𝐧𝐝𝐨𝐧𝐚𝐝𝐨, 𝐪𝐮𝐞 𝐚𝐮𝐧 𝐬𝐚𝐧𝐠𝐫𝐚 𝐩𝐚𝐥𝐚𝐛𝐫𝐚𝐬 𝐪𝐮𝐞 𝐧𝐮𝐧𝐜𝐚 𝐝𝐞𝐛𝐢𝐬𝐭𝐞 𝐥𝐞𝐞𝐫</p>
+  </header>
   <nav>
     <a onclick="mostrarSeccion('casa')">Hogar</a>
     <a onclick="mostrarSeccion('tba')">TBA</a>
