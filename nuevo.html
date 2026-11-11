@@ -1,0 +1,1257 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>El Último Jardín</title>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{min-height:100vh;background:radial-gradient(ellipse at 50% 15%,rgba(100,100,100,.13),transparent 45%),repeating-radial-gradient(ellipse at 20% 35%,#080808 0px,#111 9px,#050505 19px,#101010 30px,#000 43px);background-attachment:fixed;color:#dedede;font-family:Georgia,"Times New Roman",serif;overflow-x:hidden}
+#letter-screen{min-height:100vh;display:flex;justify-content:center;align-items:center;padding:25px;transition:opacity 1.5s ease}
+.letter{width:100%;max-width:650px;padding:35px 30px;background:rgba(0,0,0,.78);border:1px solid #292929;box-shadow:0 0 40px rgba(0,0,0,.9)}
+.letter-header{display:flex;justify-content:space-between;gap:15px;color:#777;font-family:monospace;font-size:11px;margin-bottom:28px;letter-spacing:1px}
+.letter h2{font-size:20px;font-weight:normal;letter-spacing:4px;text-align:center;margin-bottom:30px;color:#eee}
+#letter-text{font-size:15px;line-height:2;color:#c5c5c5;white-space:pre-wrap;overflow-wrap:anywhere;min-height:100px}
+.cursor{display:inline-block;width:7px;height:15px;background:#aaa;margin-left:3px;vertical-align:baseline;animation:blink .8s infinite}
+@keyframes blink{50%{opacity:0}}
+#home-screen{display:none;opacity:0;min-height:100vh;padding:65px 20px 25px;transition:opacity 1.5s ease}
+.container{width:100%;max-width:930px;margin:auto}
+.main-title{text-align:center;font-size:clamp(30px,6vw,48px);font-weight:normal;letter-spacing:5px;color:#e5e5e5;margin-bottom:35px;text-shadow:0 0 15px rgba(255,255,255,.12)}
+.home-image{width:100%;aspect-ratio:930/340;display:block;object-fit:cover;filter:grayscale(100%) brightness(.78) contrast(1.1);border:1px solid #292929;box-shadow:0 0 30px rgba(0,0,0,.8);cursor:pointer;transition:.3s}
+.home-image:hover{filter:grayscale(100%) brightness(.95) contrast(1.1)}
+.image-caption{text-align:center;color:#999;font-size:13px;letter-spacing:3px;margin-top:18px;margin-bottom:35px;font-style:italic}
+nav{display:flex;justify-content:flex-start;flex-wrap:wrap;gap:5px;border-top:1px solid #292929;border-bottom:1px solid #292929;padding:15px 0;margin-bottom:35px;font-family:monospace}
+.nav-item{position:relative}
+.nav-button{color:#888;border:1px solid transparent;background:transparent;padding:10px 13px;font-family:monospace;font-size:11px;letter-spacing:2px;transition:.3s;cursor:pointer}
+.nav-button:hover,.nav-button.active{color:#fff;background:rgba(255,255,255,.035);border-color:#333}
+.dropdown{display:none;position:absolute;top:calc(100% + 5px);left:0;width:205px;max-width:75vw;background:rgba(5,5,5,.98);border:1px solid #303030;box-shadow:0 12px 30px rgba(0,0,0,.9);z-index:50}
+#menu-OBL,#menu-ARC{left:auto;right:0}
+.dropdown.open{display:block;animation:appear .2s ease}
+.dropdown button{display:block;width:100%;padding:11px 12px;text-align:left;background:transparent;border:none;border-bottom:1px solid #202020;color:#999;font-family:Georgia,serif;font-size:11px;cursor:pointer}
+.dropdown button:last-child{border-bottom:none}
+.dropdown button:hover{background:#151515;color:#eee}
+.content-area{min-height:180px;padding:5px 0 55px;text-align:left;animation:appear .5s ease}
+.content-title{color:#d5d5d5;font-size:15px;font-weight:normal;letter-spacing:1px;margin-bottom:12px}
+.content-description{color:#888;font-size:11px;line-height:1.9;max-width:600px}
+.content-area a{color:#c5a4a4;text-decoration:underline;text-underline-offset:3px}
+.content-area a:hover{color:#fff}
+.publication{max-width:700px;margin-top:25px;padding:20px 0;border-top:1px solid #292929}
+.publication h3{font-size:14px;font-weight:normal;letter-spacing:1px;color:#ccc;margin-bottom:15px}
+.publication-body{font-size:12px;color:#999;line-height:1.9;white-space:normal;overflow-wrap:anywhere}
+.publication-body p{margin:0 0 12px}
+.publication-body ul,.publication-body ol{padding-left:25px;margin:10px 0}
+.publication-body a{color:#c5a4a4;text-decoration:underline}
+.guest-entry{width:100%;max-width:540px;margin-top:25px;padding:19px;background:rgba(0,0,0,.55);border:1px solid #292929;animation:subtleBorder 3s infinite}
+@keyframes subtleBorder{0%,100%{border-color:#292929}50%{border-color:#666}}
+.guest-label{color:#777;font-family:monospace;font-size:9px;letter-spacing:1.5px;margin-bottom:20px}
+.guest-user{color:#aaa;font-family:monospace;font-size:11px;margin-bottom:6px}
+.guest-name{color:#ddd;font-size:14px;margin-bottom:15px}
+.guest-phrase{color:#aaa;font-size:12px;line-height:1.8;font-style:italic;margin-bottom:20px}
+.guest-number{color:#666;font-family:monospace;font-size:9px;letter-spacing:1px}
+.guest-form{max-width:540px;margin-top:25px;padding:20px;background:rgba(0,0,0,.55);border:1px solid #292929}
+.guest-input,.guest-textarea,.admin-input,.admin-textarea,.admin-select{width:100%;background:#080808;border:1px solid #333;color:#ddd;padding:12px;font-family:Georgia,serif;font-size:13px;outline:none;margin-bottom:12px}
+.guest-input:focus,.guest-textarea:focus,.admin-input:focus,.admin-textarea:focus,.admin-select:focus{border-color:#777}
+.guest-textarea,.admin-textarea{min-height:110px;resize:vertical;line-height:1.6}
+.guest-submit,.admin-button{background:#111;border:1px solid #444;color:#bbb;padding:12px 22px;font-family:monospace;font-size:10px;letter-spacing:2px;cursor:pointer;transition:.2s}
+.guest-submit:hover,.admin-button:hover{background:#222;color:#fff;border-color:#888}
+.guest-submit:disabled{opacity:.4;cursor:wait}
+.guest-warning{color:#777;font-size:10px;line-height:1.8;margin-top:15px;max-width:500px}
+.guest-list{max-width:540px;margin-top:25px}
+.guest-post{padding:17px 0;border-bottom:1px solid #292929}
+.guest-post-name{color:#ccc;font-size:13px;margin-bottom:7px}
+.guest-post-message{color:#999;font-size:12px;line-height:1.8;white-space:pre-wrap;overflow-wrap:anywhere}
+.guest-post-date{color:#555;font-family:monospace;font-size:9px;margin-top:10px}
+#admin-screen{display:none;position:fixed;inset:0;z-index:500;background:rgba(0,0,0,.97);overflow-y:auto;padding:25px 16px}
+.admin-wrap{max-width:850px;margin:35px auto}
+.admin-heading{font-size:19px;font-weight:normal;letter-spacing:4px;text-align:center;margin-bottom:30px;color:#ddd}
+.admin-subtitle{color:#777;font-family:monospace;font-size:10px;letter-spacing:2px;margin:20px 0}
+.admin-box{background:#080808;border:1px solid #292929;padding:22px;margin-bottom:20px}
+.admin-input,.admin-textarea,.admin-select{margin-top:12px}
+.admin-select{appearance:auto;color:#aaa}
+.admin-select option{background:#080808}
+.admin-nav{display:flex;flex-wrap:wrap;gap:7px;margin:20px 0;border-bottom:1px solid #292929;padding-bottom:15px}
+.admin-tab{background:transparent;border:1px solid #333;color:#888;padding:10px 13px;font-family:monospace;font-size:10px;cursor:pointer}
+.admin-tab.active,.admin-tab:hover{color:#fff;border-color:#888}
+.admin-record{padding:14px 0;border-bottom:1px solid #292929;display:flex;justify-content:space-between;gap:12px;align-items:center}
+.admin-record span{font-size:12px;color:#bbb;overflow-wrap:anywhere}
+.admin-record button{background:transparent;border:1px solid #444;color:#999;padding:7px 10px;font-size:10px;cursor:pointer}
+.admin-status{font-family:monospace;font-size:11px;color:#888;line-height:1.8;margin-top:12px}
+.admin-close{display:block;margin:25px auto 0;background:transparent;border:1px solid #444;color:#888;padding:10px 20px;font-family:monospace;cursor:pointer}
+.admin-count{color:#ddd;font-family:monospace;font-size:22px;margin:10px 0}
+.admin-hint{font-size:10px;color:#666;line-height:1.8;margin-top:12px}
+.editor-toolbar{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0}
+.editor-toolbar button{background:#111;border:1px solid #444;color:#aaa;padding:9px 12px;font-family:monospace;font-size:10px;cursor:pointer}
+.editor-toolbar button:hover{border-color:#888;color:#fff}
+.rich-editor{min-height:180px;padding:14px;background:#080808;border:1px solid #333;color:#bbb;font-size:13px;line-height:1.8;outline:none;overflow-wrap:anywhere}
+.rich-editor:focus{border-color:#777}
+.rich-editor a{color:#c5a4a4;text-decoration:underline}
+.editor-help{font-size:10px;color:#666;line-height:1.8;margin:10px 0}
+.admin-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:15px}
+.admin-danger{border-color:#633!important;color:#c99!important}
+footer{border-top:1px solid #292929;padding:25px 10px;text-align:center;color:#666;font-family:monospace;font-size:11px;letter-spacing:1px;line-height:2}
+@keyframes appear{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+@media(max-width:600px){
+#home-screen{padding:45px 17px 20px}
+.main-title{margin-bottom:25px;letter-spacing:3px}
+nav{gap:2px}
+.nav-button{padding:10px 11px;font-size:10px;letter-spacing:1px}
+.dropdown{width:190px}
+.letter{padding:27px 20px}
+.letter-header{flex-wrap:wrap}
+#letter-text{font-size:13px}
+.admin-wrap{margin:15px auto}
+}
+</style>
+</head>
+
+<body>
+
+<section id="letter-screen">
+<div class="letter">
+    <div class="letter-header">
+        <span>De: Creador/Admin</span>
+        <span id="local-time"></span>
+    </div>
+    <h2>MENSAJE DE INGRESO</h2>
+    <div id="letter-text"><span id="typed-text"></span><span class="cursor" id="cursor"></span></div>
+</div>
+</section>
+
+<main id="home-screen">
+<div class="container">
+    <h1 class="main-title">El Último Jardín</h1>
+    <img id="home-logo" class="home-image"
+    src="https://i.ibb.co/q378bvQT/6336211-E-7579-4-F92-9-E93-87-F54-B37-C0-C9.png"
+    alt="El Último Jardín" title="Volver al inicio">
+    <p class="image-caption">Un jardín para los perdidos.</p>
+
+    <nav id="navigation">
+        <div class="nav-item">
+            <button class="nav-button" data-menu="HOME">HOME</button>
+            <div class="dropdown" id="menu-HOME"></div>
+        </div>
+        <div class="nav-item">
+            <button class="nav-button" data-menu="SHA">SHA</button>
+            <div class="dropdown" id="menu-SHA"></div>
+        </div>
+        <div class="nav-item">
+            <button class="nav-button" data-menu="SEC">SEC</button>
+            <div class="dropdown" id="menu-SEC"></div>
+        </div>
+        <div class="nav-item">
+            <button class="nav-button" data-menu="OBL">OBL</button>
+            <div class="dropdown" id="menu-OBL"></div>
+        </div>
+        <div class="nav-item">
+            <button class="nav-button" data-menu="ARC">ARC</button>
+            <div class="dropdown" id="menu-ARC"></div>
+        </div>
+    </nav>
+
+    <section class="content-area" id="content-area"></section>
+
+    <footer>
+        2026 El último jardín | ¿Este es el último lugar? Intenta averiguarlo
+    </footer>
+</div>
+</main>
+
+<section id="admin-screen">
+<div class="admin-wrap">
+    <h2 class="admin-heading">EL ÚLTIMO JARDÍN</h2>
+
+    <div id="admin-login" class="admin-box">
+        <p class="admin-subtitle">ACCESO RESTRINGIDO · ADMINISTRACIÓN</p>
+        <input class="admin-input" id="admin-email" type="email" placeholder="Correo del administrador" autocomplete="username">
+        <input class="admin-input" id="admin-password" type="password" placeholder="Contraseña" autocomplete="current-password">
+        <button class="admin-button" id="admin-login-button">ENTRAR</button>
+        <p class="admin-status" id="admin-login-status"></p>
+    </div>
+
+    <div id="admin-dashboard" style="display:none">
+        <p class="admin-subtitle">DIRECTORIO DE ADMINISTRACIÓN</p>
+        <div class="admin-nav">
+            <button class="admin-tab active" data-admin-tab="publicaciones">PUBLICACIONES</button>
+            <button class="admin-tab" data-admin-tab="archivos">ARCHIVOS</button>
+            <button class="admin-tab" data-admin-tab="configuracion">CONFIGURACIÓN</button>
+            <button class="admin-tab" data-admin-tab="inicio">INICIO</button>
+        </div>
+        <div id="admin-panel-content"></div>
+    </div>
+    <button class="admin-close" id="admin-close">CERRAR</button>
+</div>
+</section>
+
+<!-- Firebase se carga antes de ejecutar la aplicación -->
+<script>
+(function(){
+    const sources = [
+        "https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js",
+        "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js",
+        "https://www.gstatic.com/firebasejs/10.14.1/firebase-database-compat.js",
+        "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"
+    ];
+
+    const fallbackSources = [
+        "https://cdn.jsdelivr.net/npm/firebase@10.14.1/compat/firebase-app.js",
+        "https://cdn.jsdelivr.net/npm/firebase@10.14.1/compat/firebase-auth.js",
+        "https://cdn.jsdelivr.net/npm/firebase@10.14.1/compat/firebase-database.js",
+        "https://cdn.jsdelivr.net/npm/firebase@10.14.1/compat/firebase-firestore.js"
+    ];
+
+    function loadScript(url){
+        return new Promise((resolve,reject)=>{
+            const script=document.createElement("script");
+            script.src=url;
+            script.onload=resolve;
+            script.onerror=()=>reject(new Error("No se pudo cargar "+url));
+            document.head.appendChild(script);
+        });
+    }
+
+    async function loadAll(){
+        for(let i=0;i<sources.length;i++){
+            try{
+                await loadScript(sources[i]);
+            }catch(firstError){
+                try{
+                    await loadScript(fallbackSources[i]);
+                }catch(secondError){
+                    throw secondError;
+                }
+            }
+        }
+
+        if(!window.firebase) throw new Error("Firebase no está disponible.");
+        startGarden();
+    }
+
+    loadAll().catch(error=>{
+        console.error(error);
+        const message=document.createElement("div");
+        message.style.cssText="position:fixed;z-index:9999;bottom:12px;left:12px;right:12px;padding:15px;background:#180909;border:1px solid #633;color:#ddd;font:12px monospace;line-height:1.7";
+        message.textContent="No se pudieron cargar las librerías de Firebase. Comprueba la conexión o si el navegador bloquea los servidores de Firebase.";
+        document.body.appendChild(message);
+    });
+})();
+
+function startGarden(){
+
+/* FIREBASE */
+
+const firebaseConfig = {
+    apiKey: "AIzaSyBBBIjiRltl6_-D6FGUUml72Pq9Gb-JiEI",
+    authDomain: "site-98c0d.firebaseapp.com",
+    databaseURL: "https://site-98c0d-default-rtdb.firebaseio.com",
+    projectId: "site-98c0d",
+    storageBucket: "site-98c0d.firebasestorage.app",
+    messagingSenderId: "1091529579406",
+    appId: "1:1091529579406:web:718ee797d447947d6e62df",
+    measurementId: "G-C85KS5G5SW"
+};
+
+if(!firebase.apps.length) firebase.initializeApp(firebaseConfig);
+
+const auth=firebase.auth();
+const database=firebase.database();
+const firestore=firebase.firestore();
+const ADMIN_UID="CLFuoan5IpXSp2LRSMPlsIaYMbB3";
+
+let currentUser=null;
+let gardenOnlineCount=0;
+let presenceStarted=false;
+let guestbookStarted=false;
+let logoClicks=0;
+let logoTimer=null;
+let typingStarted=false;
+let transitionStarted=false;
+let editingId=null;
+let editingCollection=null;
+let currentContentToken=0;
+
+/* SECCIONES Y CATEGORÍAS */
+
+const sections={
+HOME:[
+{title:"Manifestación",description:"Algo ha comenzado a tomar forma. No sabemos qué lo provocó."},
+{title:"Protocolo",description:"Existen reglas que no fueron escritas para ser cuestionadas."},
+{title:"Estado del servidor",description:"La conexión permanece activa. El origen sigue sin identificarse."},
+{title:"Libro de visitas",description:"Algunos dejaron constancia de su llegada. Otros nunca debieron hacerlo."}
+],
+SHA:[
+{title:"Caminos ocultos",description:"No todos los caminos aparecen cuando los buscas."},
+{title:"El otro lado",description:"Hay algo al otro lado que parece estar esperando."},
+{title:"Reflejos",description:"A veces, lo que te observa no es tu reflejo."}
+],
+SEC:[
+{title:"Registros borrados",description:"Información eliminada que todavía deja rastros."},
+{title:"Conexiones fantasmas",description:"Señales que permanecen activas sin un origen conocido."}
+],
+OBL:[
+{title:"Foros muertos",description:"Conversaciones abandonadas que todavía reciben visitas."},
+{title:"Ubicaciones que no existen",description:"Lugares registrados en mapas que nunca fueron encontrados."},
+{title:"Registros que nadie borró",description:"Archivos que permanecieron intactos durante años."},
+{title:"Usuarios olvidados",description:"Cuentas sin actividad. Sus nombres siguen apareciendo."}
+],
+ARC:[
+{title:"Restos de 0-Site",description:"Fragmentos de una estructura que dejó de existir."},
+{title:"Conexiones antiguas",description:"Vínculos con redes que ya no deberían estar disponibles."},
+{title:"Registros viejos",description:"Documentos recuperados de servidores olvidados."},
+{title:"Lo que sobrevivió",description:"No todo desapareció cuando el sistema cayó."}
+]
+};
+
+/* MENSAJES DE BIENVENIDA */
+
+const messages=[
+`No estás aquí por curiosidad. Nadie llega a este enlace por error, ni por accidente en el algoritmo. Fuiste elegido específicamente porque cumples con el perfil, porque necesitábamos a alguien dispuesto a mirar donde nadie más se atreve a rascar.
+
+La interfaz ya se sincronizó con tus dispositivos. No intentes cerrar la pestaña; la descarga en segundo plano es irreversible una vez que abres el paquete.
+
+Bienvenido a la red. Tu rol en el experimento comienza ahora.`,
+`No entraste buscando esto; el sistema te encontró a ti. Analizamos tus patrones, cada clic fantasma, cada segundo de más que pasaste en páginas muertas. Tenías el perfil exacto.
+
+Tu navegador ya ignoró el certificado de seguridad. El archivo principal está descomprimiéndose en la memoria caché de tus dispositivos. Ya no puedes borrar el rastro.
+
+Bienvenido al nodo raíz. El experimento acaba de registrar tu primera pulsación de tecla.`,
+`Registro de acceso: 0001.
+
+Tu llegada no estaba prevista para esta hora. Sin embargo, el sistema ha reconocido tu entrada.
+
+No busques al administrador. No encontrarás respuestas en los lugares habituales.
+
+Hay cinco puertas. No todas conducen al mismo sitio.
+
+Tu investigación comienza ahora.`,
+`Has vuelto.
+
+Aunque probablemente no recuerdes haber estado aquí antes, tu registro permanece almacenado.
+
+El jardín no olvida a quienes lo visitan.
+
+Observa las imágenes. Lee los archivos. Desconfía de las historias que parecen demasiado simples.
+
+Algunas respuestas están escondidas a plena vista.`,
+`AVISO DEL SISTEMA.
+
+Se ha detectado una nueva conexión.
+
+La identidad del visitante no ha podido verificarse completamente. El acceso ha sido concedido de manera provisional.
+
+No alteres los registros.
+No ignores los símbolos.
+No confundas silencio con ausencia.
+
+Bienvenido al último lugar.`,
+`No todas las entradas tienen una salida.
+
+Algunos llegaron buscando una historia. Otros buscaban respuestas. Ninguno sabía exactamente qué encontraría.
+
+Este lugar existe entre lo que recuerdas y lo que has olvidado.
+
+Si has llegado hasta aquí, continúa.
+
+Todavía queda mucho por descubrir.`
+];
+const signature="\n\nCon cariño: EL CREADOR";
+
+/* FUNCIONES GENERALES */
+
+function getSaved(key){
+    try{return localStorage.getItem(key)}catch(e){return null}
+}
+function saveData(key,value){
+    try{localStorage.setItem(key,value)}catch(e){}
+}
+function updateTime(){
+    const el=document.getElementById("local-time");
+    if(el)el.textContent="Hora: "+new Date().toLocaleTimeString("es-EC",{hour:"2-digit",minute:"2-digit"});
+}
+updateTime();
+setInterval(updateTime,1000);
+
+/* AUTENTICACIÓN Y PRESENCIA */
+
+auth.onAuthStateChanged(async user=>{
+    currentUser=user;
+    if(!user){
+        try{await auth.signInAnonymously()}
+        catch(error){console.error("Error de autenticación anónima:",error)}
+        return;
+    }
+    startPresence(user);
+});
+
+function startPresence(user){
+    const connectedRef=database.ref(".info/connected");
+    const myPresence=database.ref("presence/"+user.uid);
+
+    connectedRef.on("value",snapshot=>{
+        if(snapshot.val()!==true)return;
+        myPresence.onDisconnect().remove()
+        .then(()=>myPresence.set(true))
+        .catch(error=>console.error("Error de presencia:",error));
+    });
+
+    if(!presenceStarted){
+        presenceStarted=true;
+        database.ref("presence").on("value",snapshot=>{
+            gardenOnlineCount=snapshot.numChildren();
+            window.gardenOnlineCount=gardenOnlineCount;
+            const counter=document.getElementById("admin-online-count");
+            if(counter)counter.textContent=gardenOnlineCount;
+        },error=>console.error(error));
+    }
+}
+
+/* CONSTRUCCIÓN DE MENÚS */
+
+Object.keys(sections).forEach(section=>{
+    const menu=document.getElementById("menu-"+section);
+    sections[section].forEach(item=>{
+        const button=document.createElement("button");
+        button.textContent=item.title;
+        button.addEventListener("click",()=>showCategory(section,item.title,item.description));
+        menu.appendChild(button);
+    });
+});
+
+document.querySelectorAll(".nav-button").forEach(button=>{
+    button.addEventListener("click",event=>{
+        event.stopPropagation();
+        const menu=document.getElementById("menu-"+button.dataset.menu);
+        const wasOpen=menu.classList.contains("open");
+        closeMenus();
+        if(!wasOpen){
+            menu.classList.add("open");
+            button.classList.add("active");
+        }
+    });
+});
+
+function closeMenus(){
+    document.querySelectorAll(".dropdown").forEach(m=>m.classList.remove("open"));
+    document.querySelectorAll(".nav-button").forEach(b=>b.classList.remove("active"));
+}
+document.addEventListener("click",event=>{
+    if(!event.target.closest(".nav-item"))closeMenus();
+});
+
+/* LIBRO DE VISITAS */
+
+function showGuestbook(){
+    const content=document.getElementById("content-area");
+    content.innerHTML=`
+    <h2 class="content-title">Libro de visitas</h2>
+    <p class="content-description">Algunos dejaron constancia de su llegada. Otros nunca debieron hacerlo.</p>
+    <div class="guest-entry">
+        <div class="guest-label">LIBRO DE VISITAS · REGISTRO FIJADO</div>
+        <div class="guest-user">zurg</div>
+        <div class="guest-name">Amalia Montenegro</div>
+        <div class="guest-phrase">«Anoche soñé con este jardín. Hoy encontré esta página».</div>
+        <div class="guest-number">REGISTRO N.º 0001</div>
+    </div>
+    <form class="guest-form" id="guest-form">
+        <div class="guest-label">DEJA TU CONSTANCIA</div>
+        <input class="guest-input" id="guest-name-input" maxlength="24" minlength="2" placeholder="Alias" required>
+        <textarea class="guest-textarea" id="guest-message-input" maxlength="500" placeholder="Escribe tu mensaje..." required></textarea>
+        <button class="guest-submit" id="guest-submit" type="submit">FIRMAR</button>
+        <p class="guest-warning">Al firmar, aceptas que tu mensaje se quede aquí. incluso después de que te vayas. incluso después de que dejes de existir.</p>
+        <p class="admin-status" id="guest-status"></p>
+    </form>
+    <div class="guest-list" id="guest-list">
+        <div class="guest-label">REGISTROS DE VISITANTES</div>
+        <p class="admin-status">Consultando registros...</p>
+    </div>`;
+
+    document.getElementById("guest-form").addEventListener("submit",async event=>{
+        event.preventDefault();
+        const name=document.getElementById("guest-name-input").value.trim();
+        const msg=document.getElementById("guest-message-input").value.trim();
+        const submit=document.getElementById("guest-submit");
+        const status=document.getElementById("guest-status");
+
+        if(name.length<2||name.length>24||msg.length<1||msg.length>500){
+            status.textContent="Revisa el alias y el mensaje.";
+            return;
+        }
+        submit.disabled=true;
+        status.textContent="Registrando firma...";
+        try{
+            await database.ref("guestbook").push({
+                name,msg,ts:firebase.database.ServerValue.TIMESTAMP
+            });
+            event.target.reset();
+            status.textContent="Tu firma ha quedado registrada.";
+        }catch(error){
+            console.error(error);
+            status.textContent="No se pudo registrar. Inténtalo de nuevo.";
+        }finally{submit.disabled=false}
+    });
+
+    if(!guestbookStarted){
+        guestbookStarted=true;
+        database.ref("guestbook").orderByChild("ts").on("value",renderGuestbook,error=>{
+            console.error(error);
+            const list=document.getElementById("guest-list");
+            if(list)list.textContent="No se pudieron cargar las firmas.";
+        });
+    }else{
+        database.ref("guestbook").orderByChild("ts").once("value").then(renderGuestbook);
+    }
+}
+
+function renderGuestbook(snapshot){
+    const list=document.getElementById("guest-list");
+    if(!list)return;
+    list.innerHTML="<div class='guest-label'>REGISTROS DE VISITANTES</div>";
+
+    if(!snapshot.exists()){
+        const empty=document.createElement("p");
+        empty.className="admin-status";
+        empty.textContent="Todavía no hay firmas.";
+        list.appendChild(empty);
+        return;
+    }
+
+    const entries=[];
+    snapshot.forEach(child=>entries.push({id:child.key,...child.val()}));
+    entries.reverse();
+
+    entries.forEach(entry=>{
+        const article=document.createElement("article");
+        article.className="guest-post";
+        const name=document.createElement("div");
+        name.className="guest-post-name";
+        name.textContent=entry.name||"Visitante";
+        const message=document.createElement("div");
+        message.className="guest-post-message";
+        message.textContent=entry.msg||"";
+        const date=document.createElement("div");
+        date.className="guest-post-date";
+        date.textContent=entry.ts?new Date(entry.ts).toLocaleString("es-EC"):"";
+        article.append(name,message,date);
+
+        if(currentUser&&currentUser.uid===ADMIN_UID){
+            const remove=document.createElement("button");
+            remove.className="admin-button admin-danger";
+            remove.textContent="ELIMINAR FIRMA";
+            remove.style.marginTop="12px";
+            remove.addEventListener("click",async()=>{
+                if(confirm("¿Eliminar esta firma?")){
+                    try{await database.ref("guestbook/"+entry.id).remove()}
+                    catch(error){alert("No se pudo eliminar: "+error.message)}
+                }
+            });
+            article.appendChild(remove);
+        }
+        list.appendChild(article);
+    });
+}
+
+/* PUBLICACIONES: HTML SEGURO */
+
+function safeHtml(html){
+    const parser=new DOMParser();
+    const doc=parser.parseFromString(String(html||""),"text/html");
+    const allowed=["P","BR","B","STRONG","I","EM","U","A","UL","OL","LI"];
+    function clean(parent){
+        [...parent.childNodes].forEach(node=>{
+            if(node.nodeType===Node.TEXT_NODE)return;
+            if(node.nodeType!==Node.ELEMENT_NODE){
+                node.remove();return;
+            }
+            if(!allowed.includes(node.tagName)){
+                node.replaceWith(...node.childNodes);
+                return;
+            }
+            [...node.attributes].forEach(attr=>{
+                if(node.tagName!=="A"||!["href","target","rel"].includes(attr.name.toLowerCase())){
+                    node.removeAttribute(attr.name);
+                }
+            });
+            if(node.tagName==="A"){
+                try{
+                    const url=new URL(node.getAttribute("href"),location.href);
+                    if(!["http:","https:","mailto:"].includes(url.protocol)){
+                        node.replaceWith(...node.childNodes);
+                        return;
+                    }
+                    node.setAttribute("target","_blank");
+                    node.setAttribute("rel","noopener noreferrer");
+                }catch(e){
+                    node.replaceWith(...node.childNodes);
+                    return;
+                }
+            }
+            clean(node);
+        });
+    }
+    clean(doc.body);
+    return doc.body.innerHTML;
+}
+
+/* MOSTRAR UNA CATEGORÍA */
+
+async function showCategory(section,title,description){
+    closeMenus();
+    saveData("gardenCategory",JSON.stringify({section,title,description}));
+
+    if(section==="HOME"&&title==="Libro de visitas"){
+        showGuestbook();return;
+    }
+
+    const content=document.getElementById("content-area");
+    const token=++currentContentToken;
+    content.innerHTML="";
+    const heading=document.createElement("h2");
+    heading.className="content-title";
+    heading.textContent=title;
+    const desc=document.createElement("p");
+    desc.className="content-description";
+    desc.textContent=description;
+    content.append(heading,desc);
+
+    const loading=document.createElement("p");
+    loading.className="admin-status";
+    loading.textContent="Consultando registros...";
+    content.appendChild(loading);
+
+    try{
+        const snapshot=await firestore.collection("publicaciones")
+            .where("menu","==",section)
+            .where("category","==",title).get();
+
+        if(token!==currentContentToken)return;
+        loading.remove();
+
+        const docs=[];
+        snapshot.forEach(doc=>docs.push({id:doc.id,...doc.data()}));
+        docs.sort((a,b)=>{
+            const ta=a.createdAt?.toMillis?.()||0;
+            const tb=b.createdAt?.toMillis?.()||0;
+            return tb-ta;
+        });
+
+        if(!docs.length){
+            const empty=document.createElement("p");
+            empty.className="admin-status";
+            empty.textContent="No hay publicaciones en esta sección.";
+            content.appendChild(empty);
+        }
+
+        docs.forEach(item=>{
+            const article=document.createElement("article");
+            article.className="publication";
+            const h=document.createElement("h3");
+            h.textContent=item.title||"Sin título";
+            const body=document.createElement("div");
+            body.className="publication-body";
+            body.innerHTML=safeHtml(item.bodyHtml||"");
+            article.append(h,body);
+            content.appendChild(article);
+        });
+
+        const files=await firestore.collection("archivos")
+            .where("menu","==",section)
+            .where("category","==",title).get();
+
+        if(token!==currentContentToken)return;
+        files.forEach(doc=>{
+            const item=doc.data();
+            const article=document.createElement("article");
+            article.className="publication";
+            const h=document.createElement("h3");
+            h.textContent=item.title||"Archivo";
+            const p=document.createElement("p");
+            p.className="publication-body";
+            p.textContent=item.description||"";
+            const a=document.createElement("a");
+            a.href=item.url||"#";
+            a.target="_blank";
+            a.rel="noopener noreferrer";
+            a.textContent=item.linkLabel||"Abrir archivo";
+            article.append(h,p,a);
+            content.appendChild(article);
+        });
+
+    }catch(error){
+        console.error("Error cargando contenido:",error);
+        if(token===currentContentToken){
+            loading.textContent="No se pudo cargar el contenido. Comprueba las reglas de Firestore.";
+        }
+    }
+}
+
+function showHome(){
+    document.getElementById("content-area").innerHTML="";
+    currentContentToken++;
+    saveData("gardenCategory",JSON.stringify({section:"HOME",title:"",description:""}));
+    closeMenus();
+}
+document.getElementById("home-logo").addEventListener("click",showHome);
+
+function restoreCategory(){
+    const saved=getSaved("gardenCategory");
+    if(!saved){showHome();return}
+    try{
+        const data=JSON.parse(saved);
+        if(data.section==="HOME"&&!data.title){showHome();return}
+        const valid=sections[data.section]?.find(item=>item.title===data.title);
+        if(valid)showCategory(data.section,valid.title,valid.description);
+        else showHome();
+    }catch(e){showHome()}
+}
+
+/* CARTA DE ENTRADA */
+
+function typeWriter(){
+    if(typingStarted)return;
+    typingStarted=true;
+    const message=messages[Math.floor(Math.random()*messages.length)]+signature;
+    const textElement=document.getElementById("typed-text");
+    const cursor=document.getElementById("cursor");
+    let index=0;
+    function type(){
+        if(index<message.length){
+            const character=message.charAt(index);
+            textElement.textContent+=character;
+            index++;
+            setTimeout(type,character==="\n"?350:32);
+        }else{
+            cursor.style.display="none";
+            setTimeout(showHomeScreen,2500);
+        }
+    }
+    type();
+}
+function showHomeScreen(){
+    if(transitionStarted)return;
+    transitionStarted=true;
+    const letter=document.getElementById("letter-screen");
+    const home=document.getElementById("home-screen");
+    letter.style.opacity="0";
+    setTimeout(()=>{
+        letter.style.display="none";
+        home.style.display="block";
+        setTimeout(()=>home.style.opacity="1",100);
+        saveData("gardenEntered","yes");
+        restoreCategory();
+    },1500);
+}
+function initializePage(){
+    if(getSaved("gardenEntered")==="yes"){
+        document.getElementById("letter-screen").style.display="none";
+        const home=document.getElementById("home-screen");
+        home.style.display="block";
+        home.style.opacity="1";
+        restoreCategory();
+    }else typeWriter();
+}
+
+/* ACCESO OCULTO: TRES TOQUES */
+
+document.getElementById("home-logo").addEventListener("click",()=>{
+    logoClicks++;
+    if(logoTimer)clearTimeout(logoTimer);
+    if(logoClicks>=3){
+        logoClicks=0;
+        openAdmin();
+        return;
+    }
+    logoTimer=setTimeout(()=>{logoClicks=0},2000);
+});
+
+function openAdmin(){
+    document.getElementById("admin-screen").style.display="block";
+    document.getElementById("admin-login-status").textContent="";
+    document.getElementById("admin-password").value="";
+    document.getElementById("admin-email").value="";
+    document.getElementById("admin-login").style.display="block";
+    document.getElementById("admin-dashboard").style.display="none";
+}
+document.getElementById("admin-close").addEventListener("click",()=>{
+    document.getElementById("admin-screen").style.display="none";
+});
+
+/* LOGIN ADMINISTRADOR */
+
+document.getElementById("admin-login-button").addEventListener("click",async()=>{
+    const email=document.getElementById("admin-email").value.trim();
+    const password=document.getElementById("admin-password").value;
+    const status=document.getElementById("admin-login-status");
+    const button=document.getElementById("admin-login-button");
+
+    if(!email||!password){
+        status.textContent="Introduce correo y contraseña.";return;
+    }
+    button.disabled=true;
+    status.textContent="Verificando acceso...";
+
+    try{
+        const credential=await auth.signInWithEmailAndPassword(email,password);
+        if(credential.user.uid!==ADMIN_UID){
+            await auth.signOut();
+            status.textContent="Acceso denegado.";
+            return;
+        }
+        document.getElementById("admin-login").style.display="none";
+        document.getElementById("admin-dashboard").style.display="block";
+        renderAdminTab("publicaciones");
+    }catch(error){
+        console.error(error);
+        status.textContent="No se pudo iniciar sesión. Revisa tus datos.";
+    }finally{button.disabled=false}
+});
+
+document.querySelectorAll(".admin-tab").forEach(button=>{
+    button.addEventListener("click",()=>{
+        document.querySelectorAll(".admin-tab").forEach(b=>b.classList.remove("active"));
+        button.classList.add("active");
+        editingId=null;
+        renderAdminTab(button.dataset.adminTab);
+    });
+});
+
+/* SELECTORES DE MENÚ Y CATEGORÍA */
+
+function menuOptions(selected="HOME"){
+    return Object.keys(sections).map(key=>
+        `<option value="${key}" ${key===selected?"selected":""}>${key}</option>`
+    ).join("");
+}
+function categoryOptions(menu,selected=""){
+    return sections[menu].map(item=>
+        `<option value="${item.title}" ${item.title===selected?"selected":""}>${item.title}</option>`
+    ).join("");
+}
+function fillCategorySelect(menuSelect,categorySelect,selected=""){
+    categorySelect.innerHTML=categoryOptions(menuSelect.value,selected);
+}
+function addLocationSelectors(menuValue="HOME",categoryValue="Manifestación"){
+    return `
+    <label class="admin-status">MENÚ DONDE SE PUBLICARÁ</label>
+    <select class="admin-select" id="record-menu">${menuOptions(menuValue)}</select>
+    <label class="admin-status">CATEGORÍA</label>
+    <select class="admin-select" id="record-category">${categoryOptions(menuValue,categoryValue)}</select>`;
+}
+
+/* EDITOR DE CONTENIDO Y ENLACES */
+
+function editorToolbar(){
+    return `
+    <div class="editor-toolbar">
+        <button type="button" data-command="bold"><b>B</b></button>
+        <button type="button" data-command="italic"><i>I</i></button>
+        <button type="button" data-command="underline"><u>U</u></button>
+        <button type="button" data-command="insertUnorderedList">LISTA</button>
+        <button type="button" id="insert-link">INSERTAR LINK</button>
+        <button type="button" id="remove-link">QUITAR LINK</button>
+    </div>
+    <div class="editor-help">Selecciona una palabra o frase dentro del contenido y pulsa INSERTAR LINK. Después introduce la dirección web.</div>
+    <div class="rich-editor" id="rich-editor" contenteditable="true" spellcheck="true"></div>`;
+}
+function setupEditor(initialHtml=""){
+    const editor=document.getElementById("rich-editor");
+    editor.innerHTML=safeHtml(initialHtml);
+
+    document.querySelectorAll("[data-command]").forEach(button=>{
+        button.addEventListener("click",()=>{
+            editor.focus();
+            document.execCommand(button.dataset.command,false,null);
+        });
+    });
+
+    document.getElementById("insert-link").addEventListener("click",()=>{
+        editor.focus();
+        const selection=window.getSelection();
+        if(!selection||selection.isCollapsed){
+            alert("Primero selecciona la palabra o frase que quieres convertir en enlace.");
+            return;
+        }
+        const raw=prompt("Introduce la dirección del enlace (https://...)");
+        if(!raw)return;
+        let url;
+        try{url=new URL(raw.trim())}
+        catch(e){alert("La dirección no es válida.");return}
+        if(!["http:","https:","mailto:"].includes(url.protocol)){
+            alert("Solo se permiten enlaces http, https o mailto.");
+            return;
+        }
+        document.execCommand("createLink",false,url.href);
+        editor.querySelectorAll("a").forEach(a=>{
+            a.target="_blank";
+            a.rel="noopener noreferrer";
+        });
+    });
+
+    document.getElementById("remove-link").addEventListener("click",()=>{
+        editor.focus();
+        document.execCommand("unlink",false,null);
+    });
+}
+
+/* PANEL DE ADMINISTRACIÓN */
+
+function renderAdminTab(tab){
+    const panel=document.getElementById("admin-panel-content");
+
+    if(tab==="inicio"){
+        panel.innerHTML=`
+        <div class="admin-box">
+            <p class="admin-subtitle">ESTADO DEL SISTEMA</p>
+            <p class="admin-status">Firebase conectado.</p>
+            <p class="admin-subtitle">VISITANTES EN LÍNEA</p>
+            <div class="admin-count" id="admin-online-count">${gardenOnlineCount}</div>
+            <p class="admin-hint">El conteo representa conexiones anónimas activas, no personas únicas.</p>
+            <p class="admin-subtitle">LIBRO DE VISITAS</p>
+            <button class="admin-button" id="admin-guestbook-button">MODERAR FIRMAS</button>
+        </div>`;
+        document.getElementById("admin-guestbook-button").addEventListener("click",()=>{
+            document.getElementById("admin-screen").style.display="none";
+            showCategory("HOME","Libro de visitas","Algunos dejaron constancia de su llegada.");
+        });
+        return;
+    }
+
+    if(tab==="publicaciones"){
+        renderPublicationEditor();
+        return;
+    }
+
+    if(tab==="archivos"){
+        renderFileEditor();
+        return;
+    }
+
+    if(tab==="configuracion"){
+        renderConfiguration();
+    }
+}
+
+/* PUBLICACIONES */
+
+function renderPublicationEditor(editData=null){
+    const panel=document.getElementById("admin-panel-content");
+    const menu=editData?.menu||"HOME";
+    const category=editData?.category||sections[menu][0].title;
+
+    panel.innerHTML=`
+    <div class="admin-box">
+        <p class="admin-subtitle">${editData?"EDITAR PUBLICACIÓN":"NUEVA PUBLICACIÓN"}</p>
+        ${addLocationSelectors(menu,category)}
+        <label class="admin-status">TÍTULO</label>
+        <input class="admin-input" id="record-title" maxlength="120" placeholder="Título de la publicación">
+        <label class="admin-status">CONTENIDO</label>
+        ${editorToolbar()}
+        <div class="admin-actions">
+            <button class="admin-button" id="record-save">${editData?"GUARDAR CAMBIOS":"PUBLICAR"}</button>
+            <button class="admin-button" id="record-cancel">CANCELAR</button>
+        </div>
+        <p class="admin-status" id="record-status"></p>
+    </div>
+    <div class="admin-box">
+        <p class="admin-subtitle">PUBLICACIONES EXISTENTES</p>
+        <div id="record-list" class="admin-status">Cargando...</div>
+    </div>`;
+
+    const menuSelect=document.getElementById("record-menu");
+    const categorySelect=document.getElementById("record-category");
+    menuSelect.addEventListener("change",()=>fillCategorySelect(menuSelect,categorySelect));
+
+    setupEditor(editData?.bodyHtml||"");
+    if(editData)document.getElementById("record-title").value=editData.title||"";
+
+    document.getElementById("record-cancel").addEventListener("click",()=>{
+        editingId=null;editingCollection=null;renderPublicationEditor();
+    });
+
+    document.getElementById("record-save").addEventListener("click",async()=>{
+        const title=document.getElementById("record-title").value.trim();
+        const bodyHtml=safeHtml(document.getElementById("rich-editor").innerHTML);
+        const status=document.getElementById("record-status");
+        if(!title||!document.getElementById("rich-editor").textContent.trim()){
+            status.textContent="Escribe un título y contenido.";
+            return;
+        }
+        const data={
+            menu:menuSelect.value,
+            category:categorySelect.value,
+            title,
+            bodyHtml,
+            updatedAt:firebase.firestore.FieldValue.serverTimestamp()
+        };
+        try{
+            if(editingId){
+                await firestore.collection("publicaciones").doc(editingId).update(data);
+                status.textContent="Publicación actualizada.";
+            }else{
+                data.createdAt=firebase.firestore.FieldValue.serverTimestamp();
+                await firestore.collection("publicaciones").add(data);
+                status.textContent="Publicación creada.";
+            }
+            editingId=null;
+            editingCollection=null;
+            renderPublicationEditor();
+        }catch(error){
+            console.error(error);
+            status.textContent="No se pudo guardar. Comprueba las reglas de Firestore.";
+        }
+    });
+
+    loadPublicationList();
+}
+
+async function loadPublicationList(){
+    const list=document.getElementById("record-list");
+    if(!list)return;
+    try{
+        const snapshot=await firestore.collection("publicaciones").get();
+        if(!document.getElementById("record-list"))return;
+        list.innerHTML="";
+        if(snapshot.empty){list.textContent="No hay publicaciones todavía.";return}
+
+        const docs=[];
+        snapshot.forEach(doc=>docs.push({id:doc.id,...doc.data()}));
+        docs.sort((a,b)=>(b.createdAt?.toMillis?.()||0)-(a.createdAt?.toMillis?.()||0));
+
+        docs.forEach(item=>{
+            const row=document.createElement("div");
+            row.className="admin-record";
+            const label=document.createElement("span");
+            label.textContent=`${item.menu||""} / ${item.category||""} — ${item.title||"Sin título"}`;
+
+            const actions=document.createElement("div");
+            actions.className="admin-actions";
+
+            const edit=document.createElement("button");
+            edit.textContent="EDITAR";
+            edit.addEventListener("click",()=>{
+                editingId=item.id;
+                renderPublicationEditor(item);
+            });
+
+            const remove=document.createElement("button");
+            remove.textContent="ELIMINAR";
+            remove.className="admin-danger";
+            remove.addEventListener("click",async()=>{
+                if(!confirm("¿Eliminar esta publicación?"))return;
+                try{
+                    await firestore.collection("publicaciones").doc(item.id).delete();
+                    loadPublicationList();
+                }catch(error){alert("No se pudo eliminar.")}
+            });
+
+            actions.append(edit,remove);
+            row.append(label,actions);
+            list.appendChild(row);
+        });
+    }catch(error){
+        console.error(error);
+        list.textContent="No se pudieron cargar las publicaciones. Revisa las reglas de Firestore.";
+    }
+}
+
+/* ARCHIVOS */
+
+function renderFileEditor(editData=null){
+    const panel=document.getElementById("admin-panel-content");
+    const menu=editData?.menu||"HOME";
+    const category=editData?.category||sections[menu][0].title;
+
+    panel.innerHTML=`
+    <div class="admin-box">
+        <p class="admin-subtitle">${editData?"EDITAR ARCHIVO":"AÑADIR ARCHIVO"}</p>
+        ${addLocationSelectors(menu,category)}
+        <label class="admin-status">NOMBRE DEL ARCHIVO</label>
+        <input class="admin-input" id="file-title" placeholder="Nombre o título">
+        <label class="admin-status">DESCRIPCIÓN</label>
+        <textarea class="admin-textarea" id="file-description" placeholder="Descripción breve"></textarea>
+        <label class="admin-status">DIRECCIÓN DEL ARCHIVO</label>
+        <input class="admin-input" id="file-url" type="url" placeholder="https://...">
+        <label class="admin-status">TEXTO DEL ENLACE</label>
+        <input class="admin-input" id="file-label" placeholder="Abrir archivo">
+        <div class="admin-actions">
+            <button class="admin-button" id="file-save">${editData?"GUARDAR CAMBIOS":"AÑADIR ARCHIVO"}</button>
+            <button class="admin-button" id="file-cancel">CANCELAR</button>
+        </div>
+        <p class="admin-status" id="file-status"></p>
+    </div>
+    <div class="admin-box">
+        <p class="admin-subtitle">ARCHIVOS EXISTENTES</p>
+        <div id="file-list" class="admin-status">Cargando...</div>
+    </div>`;
+
+    const menuSelect=document.getElementById("record-menu");
+    const categorySelect=document.getElementById("record-category");
+    menuSelect.addEventListener("change",()=>fillCategorySelect(menuSelect,categorySelect));
+
+    if(editData){
+        document.getElementById("file-title").value=editData.title||"";
+        document.getElementById("file-description").value=editData.description||"";
+        document.getElementById("file-url").value=editData.url||"";
+        document.getElementById("file-label").value=editData.linkLabel||"Abrir archivo";
+    }
+
+    document.getElementById("file-cancel").addEventListener("click",()=>{
+        editingId=null;renderFileEditor();
+    });
+
+    document.getElementById("file-save").addEventListener("click",async()=>{
+        const title=document.getElementById("file-title").value.trim();
+        const description=document.getElementById("file-description").value.trim();
+        const rawUrl=document.getElementById("file-url").value.trim();
+        const linkLabel=document.getElementById("file-label").value.trim()||"Abrir archivo";
+        const status=document.getElementById("file-status");
+
+        let url;
+        try{url=new URL(rawUrl)}
+        catch(e){status.textContent="Introduce una dirección válida.";return}
+        if(!["http:","https:"].includes(url.protocol)){
+            status.textContent="Solo se permiten enlaces http o https.";return;
+        }
+        if(!title){status.textContent="Escribe un nombre para el archivo.";return}
+
+        const data={
+            menu:menuSelect.value,
+            category:categorySelect.value,
+            title,description,url:url.href,linkLabel,
+            updatedAt:firebase.firestore.FieldValue.serverTimestamp()
+        };
+
+        try{
+            if(editingId){
+                await firestore.collection("archivos").doc(editingId).update(data);
+                status.textContent="Archivo actualizado.";
+            }else{
+                data.createdAt=firebase.firestore.FieldValue.serverTimestamp();
+                await firestore.collection("archivos").add(data);
+                status.textContent="Archivo añadido.";
+            }
+            editingId=null;
+            renderFileEditor();
+        }catch(error){
+            console.error(error);
+            status.textContent="No se pudo guardar. Comprueba las reglas de Firestore.";
+        }
+    });
+
+    loadFileList();
+}
+
+async function loadFileList(){
+    const list=document.getElementById("file-list");
+    if(!list)return;
+    try{
+        const snapshot=await firestore.collection("archivos").get();
+        if(!document.getElementById("file-list"))return;
+        list.innerHTML="";
+        if(snapshot.empty){list.textContent="No hay archivos todavía.";return}
+        snapshot.forEach(doc=>{
+            const item={id:doc.id,...doc.data()};
+            const row=document.createElement("div");
+            row.className="admin-record";
+            const label=document.createElement("span");
+            label.textContent=`${item.menu||""} / ${item.category||""} — ${item.title||"Archivo"}`;
+            const actions=document.createElement("div");
+            actions.className="admin-actions";
+            const edit=document.createElement("button");
+            edit.textContent="EDITAR";
+            edit.addEventListener("click",()=>{
+                editingId=item.id;renderFileEditor(item);
+            });
+            const remove=document.createElement("button");
+            remove.textContent="ELIMINAR";
+            remove.className="admin-danger";
+            remove.addEventListener("click",async()=>{
+                if(!confirm("¿Eliminar este archivo?"))return;
+                try{
+                    await firestore.collection("archivos").doc(item.id).delete();
+                    loadFileList();
+                }catch(error){alert("No se pudo eliminar.")}
+            });
+            actions.append(edit,remove);
+            row.append(label,actions);
+            list.appendChild(row);
+        });
+    }catch(error){
+        console.error(error);
+        list.textContent="No se pudieron cargar los archivos. Revisa las reglas de Firestore.";
+    }
+}
+
+/* CONFIGURACIÓN */
+
+function renderConfiguration(){
+    const panel=document.getElementById("admin-panel-content");
+    panel.innerHTML=`
+    <div class="admin-box">
+        <p class="admin-subtitle">CONFIGURACIÓN DEL SITIO</p>
+        <input class="admin-input" id="config-key" placeholder="Nombre de la opción">
+        <textarea class="admin-textarea" id="config-value" placeholder="Valor"></textarea>
+        <button class="admin-button" id="config-save">GUARDAR CONFIGURACIÓN</button>
+        <p class="admin-status" id="config-status"></p>
+        <div id="config-list" class="admin-status">Cargando...</div>
+    </div>`;
+
+    loadConfig();
+
+    document.getElementById("config-save").addEventListener("click",async()=>{
+        const key=document.getElementById("config-key").value.trim();
+        const value=document.getElementById("config-value").value.trim();
+        const status=document.getElementById("config-status");
+        if(!key||!value){status.textContent="Completa ambos campos.";return}
+        try{
+            await firestore.collection("configuracion").doc(key).set({
+                value,updatedAt:firebase.firestore.FieldValue.serverTimestamp()
+            });
+            status.textContent="Configuración guardada.";
+            loadConfig();
+        }catch(error){
+            console.error(error);
+            status.textContent="No se pudo guardar. Revisa las reglas de Firestore.";
+        }
+    });
+}
+
+async function loadConfig(){
+    const list=document.getElementById("config-list");
+    if(!list)return;
+    try{
+        const snapshot=await firestore.collection("configuracion").get();
+        if(!document.getElementById("config-list"))return;
+        list.innerHTML="";
+        if(snapshot.empty){list.textContent="No hay opciones guardadas.";return}
+        snapshot.forEach(doc=>{
+            const row=document.createElement("div");
+            row.className="admin-record";
+            const label=document.createElement("span");
+            label.textContent=doc.id+": "+(doc.data().value||"");
+            const remove=document.createElement("button");
+            remove.textContent="ELIMINAR";
+            remove.addEventListener("click",async()=>{
+                if(!confirm("¿Eliminar esta configuración?"))return;
+                try{
+                    await firestore.collection("configuracion").doc(doc.id).delete();
+                    loadConfig();
+                }catch(error){alert("No se pudo eliminar.")}
+            });
+            row.append(label,remove);
+            list.appendChild(row);
+        });
+    }catch(error){
+        console.error(error);
+        list.textContent="No se pudo cargar la configuración. Revisa las reglas de Firestore.";
+    }
+}
+
+/* INICIO */
+
+initializePage();
+
+}
+</script>
+</body>
+</html>
